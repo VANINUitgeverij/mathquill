@@ -128,9 +128,6 @@ Node.open(function(_) {
       ctrlr.notify('move').cursor.insAtRightEnd(ctrlr.root);
       while (cursor[L]) ctrlr.selectLeft();
       break;
-	  
-    case 'Enter':
-      ctrlr.handle('enter');
 
     default:
       return;
