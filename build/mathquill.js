@@ -1009,6 +1009,18 @@ function getInterface(v) {
       _.textTemplate = [name + '(', ')'];
     });
   };
+  MQ.bindCharBracketPair = function(open, close) {
+    if (open && close) {
+        CharCmds[open] = bind(Bracket, L, open, close, open, close);
+        CharCmds[close] = bind(Bracket, R, open, close, open, close);
+    } else if (open) {
+        delete CharCmds[open];
+    } else if (close) {
+        delete CharCmds[close];
+    }
+  };
+    MQ.bindCharBracketPair('[', null);
+    MQ.bindCharBracketPair(null, ']');
 
   var AbstractMathQuill = APIClasses.AbstractMathQuill = P(Progenote, function(_) {
     _.init = function(ctrlr) {
