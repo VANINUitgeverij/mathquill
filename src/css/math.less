@@ -90,6 +90,28 @@
     font-size: 200%;
   }
 
+  .mq-int {
+    > big {
+      display: inline-block;
+      .transform(scaleX(.7));
+      vertical-align: -.16em;
+    }
+
+    > .mq-supsub {
+      font-size: 80%;
+      vertical-align: -1.1em;
+      padding-right: .2em;
+
+      > .mq-sup > .mq-sup-inner {
+        vertical-align: 1.3em;
+      }
+
+      > .mq-sub {
+        margin-left: -.35em;
+      }
+    }
+  }
+
   .mq-roman {
     font-style: normal;
   }
@@ -132,10 +154,6 @@
     text-align: left;
     font-size: 90%;
     vertical-align: -.5em;
-    &.mq-limit {
-      font-size: 80%;
-      vertical-align: -.4em;
-    }
 
     &.mq-sup-only {
       vertical-align: .5em;
@@ -153,9 +171,6 @@
     .mq-sub {
       display: block;
       float: left;
-    }
-    &.mq-limit .mq-sub {
-      margin-left: -.25em;
     }
 
     .mq-binary-operator {
@@ -279,15 +294,29 @@
     padding-top: 1px;
   }
 
-  .mq-vector-prefix {
+  .mq-diacritic-above {
     display: block;
     text-align: center;
-    line-height: .25em;
-    margin-bottom: -.1em;
-    font-size: 0.75em;
+    line-height: .4em;
   }
 
-  .mq-vector-stem {
+  .mq-diacritic-stem {
+    display: block;
+    text-align: center;
+  }
+  
+  .mq-hat-prefix {
+    display: block;
+    text-align: center;
+    line-height: .95em;
+    margin-bottom: -.7em;
+    transform: scaleX(1.5);
+    -moz-transform: scaleX(1.5);
+    -o-transform: scaleX(1.5);
+    -webkit-transform: scaleX(1.5);
+  }
+
+  .mq-hat-stem {
     display: block;
   }
 
