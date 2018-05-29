@@ -65,11 +65,11 @@ var TextBlock = P(Node, function(_, super_) {
   _.latex = function() {
     var contents = this.textContents();
     if (contents.length === 0) return '';
-    return '\\text{' + contents + '}';
+    return '\\text{' + contents.replace(/\\/g, '\\backslash ').replace(/[{}]/g, '\\$&') + '}';
   };
   _.html = function() {
     return (
-        '<span class="mq-text-mode" mathquill-command-id='+this.id+'>'
+        '<span class="mq-text-mode mq-inset" mathquill-command-id='+this.id+'>'
       +   this.textContents()
       + '</span>'
     );
