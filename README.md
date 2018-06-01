@@ -41,3 +41,14 @@ License, v. 2.0: [http://mozilla.org/MPL/2.0/](http://mozilla.org/MPL/2.0/)
 The quick-and-dirty is you can do whatever if modifications to MathQuill are in
 public GitHub forks. (Other ways to publicize modifications are also fine, as
 are private use modifications. See also: [MPL 2.0 FAQ](https://www.mozilla.org/en-US/MPL/2.0/FAQ/))
+
+## Release Management for diddit
+
+Make sure ```make``` command is available. (If not, on windows install Cygwin, and make sure make is installed. Add the Cygwin /bin directory to the system variables)
+
+1. Run npm install
+2. Run make
+3. Commit and push (make sure everything in the build-folder is there)
+4. Add the version tag 
+
+
