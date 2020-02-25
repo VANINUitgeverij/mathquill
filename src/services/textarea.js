@@ -5,8 +5,10 @@
 
 Controller.open(function(_) {
   Options.p.substituteTextarea = function() {
+    var isTablet = /iphone|ipad|ipod|android/i.test(navigator.userAgent.toLowerCase());
+
     return $('<textarea autocapitalize=off autocomplete=off autocorrect=off ' +
-               'spellcheck=false x-palm-disable-ste-all=true />')[0];
+               'spellcheck=false x-palm-disable-ste-all=true ' + (isTablet ? 'readonly' : '') + ' />')[0];
   };
   _.createTextarea = function() {
     var textareaSpan = this.textareaSpan = $('<span class="mq-textarea"></span>'),
