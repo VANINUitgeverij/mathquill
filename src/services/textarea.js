@@ -5,7 +5,7 @@
 
 Controller.open(function(_) {
   Options.p.substituteTextarea = function() {
-    var isTablet = /iphone|ipad|ipod|android/i.test(navigator.userAgent.toLowerCase());
+    var isTablet = /iphone|ipad|ipod|android/i.test(navigator.userAgent.toLowerCase()) || _.isIpadOS();
 
     return $('<textarea autocapitalize=off autocomplete=off autocorrect=off ' +
                'spellcheck=false x-palm-disable-ste-all=true ' + (isTablet ? 'readonly' : '') + ' />')[0];
@@ -113,4 +113,22 @@ Controller.open(function(_) {
     // FIXME: this always inserts math or a TextBlock, even in a RootTextBlock
     this.writeLatex(text).cursor.show();
   };
+  _.isIpadOS = function() {
+    if (window.navigator.userAgent.match(/Macintosh/i) !== null) {
+    // need to distinguish between Macbook and iPad
+    var canvas = document.createElement("canvas");
+    if (canvas !== null) {
+      var context = canvas.getContext("webgl") || canvas.getContext("experimental-webgl");
+      if (context) {
+        var info = context.getExtension("WEBGL_debug_renderer_info");
+        if (info) {
+          var renderer = context.getParameter(info.UNMASKED_RENDERER_WEBGL);
+          if (renderer.indexOf("Apple") !== -1)
+            return true;
+        }
+      }
+    }
+  }
+return false;
+}
 });
