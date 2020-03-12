@@ -1,5 +1,5 @@
 /**
- * MathQuill v0.11.1, by Han, Jeanine, and Mary
+ * MathQuill v0.11.2, by Han, Jeanine, and Mary
  * http://mathquill.com | maintainers@mathquill.com
  *
  * This Source Code Form is subject to the terms of the
@@ -936,7 +936,7 @@ function MathQuill(el) {
   return MQ1(el);
 };
 MathQuill.prototype = Progenote.p;
-MathQuill.VERSION = "v0.11.1";
+MathQuill.VERSION = "v0.11.2";
 MathQuill.interfaceVersion = function(v) {
   // shim for #459-era interface versioning (ended with #495)
   if (v !== 1) throw 'Only interface version 1 supported. You specified: ' + v;
@@ -2105,7 +2105,8 @@ Controller.open(function(_) {
 
 Controller.open(function(_) {
   Options.p.substituteTextarea = function() {
-    var isTablet = /iphone|ipad|ipod|android/i.test(navigator.userAgent.toLowerCase());
+    var isTablet = /iphone|ipad|ipod|android/i.test(navigator.userAgent.toLowerCase()) || _.isIpadOS();
+    console.log(_.isIpadOS());
 
     return $('<textarea autocapitalize=off autocomplete=off autocorrect=off ' +
                'spellcheck=false x-palm-disable-ste-all=true ' + (isTablet ? 'readonly' : '') + ' />')[0];
@@ -2213,6 +2214,24 @@ Controller.open(function(_) {
     // FIXME: this always inserts math or a TextBlock, even in a RootTextBlock
     this.writeLatex(text).cursor.show();
   };
+  _.isIpadOS = function() {
+    if (window.navigator.userAgent.match(/Macintosh/i) !== null) {
+    // need to distinguish between Macbook and iPad
+    var canvas = document.createElement("canvas");
+    if (canvas !== null) {
+      var context = canvas.getContext("webgl") || canvas.getContext("experimental-webgl");
+      if (context) {
+        var info = context.getExtension("WEBGL_debug_renderer_info");
+        if (info) {
+          var renderer = context.getParameter(info.UNMASKED_RENDERER_WEBGL);
+          if (renderer.indexOf("Apple") !== -1)
+            return true;
+        }
+      }
+    }
+  }
+return false;
+}
 });
 // Parser MathBlock
 var latexMathParser = (function() {
